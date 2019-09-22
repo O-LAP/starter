@@ -19,7 +19,7 @@ async function reloadolap() {
 async function reloaddesign() {
 
   if (typeof Design !== "undefined") {
-    // OLAP.clearDesign();
+    OLAP.clearDesign();
     delete Design;
   }
 

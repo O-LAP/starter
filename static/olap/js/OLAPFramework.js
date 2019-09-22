@@ -546,12 +546,17 @@ class OLAPFramework {
 			return;
 		}
 
-		this.clearUI();
-		this.clearGeometry();
+		this.clearDesign();
 		this.loadedDesign = designObj;
 		await this.loadedDesign.init();
 		await this.loadUI(gitAuthor, gitRepo);
 		await this.updateGeom();
+	}
+
+	clearDesign() {
+		this.clearUI();
+		this.clearGeometry();
+		this.loadedDesign = null;
 	}
 
 	clearUI() {

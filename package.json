@@ -4,9 +4,13 @@
   "description": "NPM starter template for O-LAP designs.",
   "main": "index.js",
   "scripts": {
-  	"start": "node index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "amitlzkpa",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "sirv": "^0.4.2"
+  }
 }

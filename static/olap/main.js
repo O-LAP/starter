@@ -13,26 +13,14 @@ async function run() {
 
 
   let OLAP_DESIGN_SRC_URL = '/Design.js';
-  loadDesignFromURL(OLAP_DESIGN_SRC_URL);
-
-
-}
-
-
-
-
-
-
-
-
-
-async function loadDesignFromURL(designJSUrl) {
-
-  let olapDsRsrc = await fetch(designJSUrl);
+  let olapDsRsrc = await fetch(OLAP_DESIGN_SRC_URL);
   let olapDsRsrcText = await olapDsRsrc.text();
   eval.apply(window, [olapDsRsrcText]);
   OLAP.openDesign(Design);
 
 }
+
+
+
 
 

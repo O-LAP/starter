@@ -518,7 +518,7 @@ class OLAPFramework {
 
 	async openDesign(designObj, gitAuthor, gitRepo) {
 
-		this.checkMessage();
+		// this.checkMessage();
 
 		if(!hasProperty(designObj, "info")) {
 			console.log("Design file needs property 'info' containing design information.");

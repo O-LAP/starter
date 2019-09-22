@@ -1,19 +1,31 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+const getPort = require('get-port');
 
-const PORT = process.env.PORT || 3000;
 
-app.use(express.static('static'));
 
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname + '/public/index.html'));
-});
+async function rundev() {
 
-app.get('*', function(req, res){
-  res.status(404).send('Not found');
-});
+  const PORT = await getPort({port: getPort.makeRange(3000, 3100)});
 
-app.listen(PORT, () => {
-  console.log(`Ready on localhost:${PORT}~...`);
-});
+  app.use(express.static('static'));
+
+  app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/index.html'));
+  });
+
+  app.get('*', function(req, res){
+    res.status(404).send('Not found');
+  });
+
+  app.listen(PORT, () => {
+    console.log(`Listening on: localhost:${PORT}`);
+  });
+
+
+}
+
+
+rundev();
+

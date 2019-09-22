@@ -10,6 +10,7 @@ async function rundev() {
   const PORT = await getPort({port: getPort.makeRange(3000, 3100)});
 
   app.use(express.static('static'));
+  app.use(express.static('design'));
 
   app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/index.html'));

@@ -23,18 +23,62 @@ async function reloaddesign() {
     delete Design;
   }
 
+  let dsSrcFmTxtBox = await getDsSrcFmInpBox();
   // http://localhost:3000/?design-source=./Plato.js
-  let dsSrcFmTxtBox = $('#design-source').val();
+  let dsSrcFmUrlDrct = await getDsSrcFmUrlDirect();
+  // http://localhost:3000/app.html?a=amitlzkpa&r=o-lap_plato
+  let dsSrcFmUrlGithub = await getDsSrcFmUrlGithub();
 
-  let url = new URL(window.location.href);
-  let dsSrcFmUrl = url.searchParams.get("design-source");
-
-  let OLAP_DESIGN_SRC_URL = dsSrcFmTxtBox || dsSrcFmUrl || '/Design.js';
+  let OLAP_DESIGN_SRC_URL = dsSrcFmTxtBox || dsSrcFmUrlDrct || dsSrcFmUrlGithub || '/Design.js';
   $('#design-source').val(OLAP_DESIGN_SRC_URL);
-  url.searchParams.set("design-source", OLAP_DESIGN_SRC_URL);
   let olapDsRsrc = await $.get(OLAP_DESIGN_SRC_URL);
   eval.apply(window, [olapDsRsrc]);
-  OLAP.openDesign(Design);
+
+  if (dsSrcFmUrlGithub) {
+    let url = new URL(window.location.href);
+    let gitAuthor = url.searchParams.get("a") || null;
+    let gitRepo = url.searchParams.get("r") || null;
+
+    OLAP.openDesign(Design, gitAuthor, gitRepo);
+  } else {
+    OLAP.openDesign(Design);
+  }
+
+}
+
+
+async function getDsSrcFmUrlGithub() {
+  try {
+    let url = new URL(window.location.href);
+    let gitAuthor = url.searchParams.get("a");
+    let gitRepo = url.searchParams.get("r");
+    if (gitAuthor == null || gitRepo == null) return null;
+    let designJSUrl = `https://raw.githubusercontent.com/${gitAuthor}/${gitRepo}/master/design/Design.js`;
+    return designJSUrl;
+  } catch(err) {
+    return null;
+  }
+}
+
+
+async function getDsSrcFmUrlDirect() {
+  try {
+    let url = new URL(window.location.href);
+    let val = url.searchParams.get("design-source");
+    return (val === '') ? null : val;
+  } catch(err) {
+    return null;
+  }
+}
+
+
+async function getDsSrcFmInpBox() {
+  try {
+    let val = $('#design-source').val();
+    return (val === '') ? null : val;
+  } catch(err) {
+    return null;
+  }
 }
 
 

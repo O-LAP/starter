@@ -1,5 +1,5 @@
 {
-  "name": "starter",
+  "name": "olap-starter",
   "version": "0.0.1",
   "description": "NPM starter template for O-LAP designs.",
   "main": "index.js",

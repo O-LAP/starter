@@ -13,6 +13,6 @@
     "express": "^4.17.1",
     "get-port": "^5.0.0",
     "nodemon": "^1.19.2",
-    "olap-core": "../olap-core"
+    "olap-core": "0.0.1"
   }
 }

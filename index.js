@@ -9,7 +9,7 @@ async function rundev() {
 
   const PORT = await getPort({port: getPort.makeRange(3000, 3100)});
 
-  app.use(express.static('static'));
+  app.use('/', express.static('node_modules/olap-core/'));
   app.use(express.static('design'));
 
   app.get('/dev', function(req, res) {
